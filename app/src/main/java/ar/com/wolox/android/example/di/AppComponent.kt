@@ -2,7 +2,7 @@ package ar.com.wolox.android.example.di
 
 import android.app.Application
 
-import ar.com.wolox.android.example.BootstrapApplication
+import ar.com.wolox.android.example.NewsApplication
 import ar.com.wolox.android.example.di.module.MiscModule
 import ar.com.wolox.android.example.ui.viewpager.ViewPagerActivityModule
 import ar.com.wolox.wolmo.core.di.modules.ContextModule
@@ -19,10 +19,10 @@ import dagger.android.support.AndroidSupportInjectionModule
 @Component(dependencies = [NetworkingComponent::class],
         modules = [AndroidSupportInjectionModule::class, DefaultModule::class, ContextModule::class,
             AppModule::class, ViewPagerActivityModule::class, MiscModule::class])
-interface AppComponent : AndroidInjector<BootstrapApplication> {
+interface AppComponent : AndroidInjector<NewsApplication> {
 
     @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<BootstrapApplication>() {
+    abstract class Builder : AndroidInjector.Builder<NewsApplication>() {
 
         @BindsInstance
         abstract fun application(application: Application): Builder
