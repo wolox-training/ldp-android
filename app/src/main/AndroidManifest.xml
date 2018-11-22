@@ -31,7 +31,9 @@
         <!-- android:name=".example.ui.viewpager.ViewPagerActivity" -->
         <!-- android:screenOrientation="portrait" /> -->
 
-        <activity android:name=".example.ui.login.LoginActivity">
+        <activity
+            android:name=".example.ui.login.LoginActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
