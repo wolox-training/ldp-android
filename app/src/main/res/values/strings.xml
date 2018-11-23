@@ -22,4 +22,11 @@
     <string name="login_empty_form">All fields are required</string>
     <string name="login_invalid_email">Enter a valid email</string>
 
+    <!-- Sign up -->
+    <string name="sign_up_confirm_password">Confirm password</string>
+    <string name="sign_up_join">Join</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_up_terms_url">http://www.wolox.com.ar/</string>
+
+    <string name="app_not_found">No available applications to proceed</string>
 </resources>

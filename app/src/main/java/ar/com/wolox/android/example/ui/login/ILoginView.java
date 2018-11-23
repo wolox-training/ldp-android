@@ -11,4 +11,5 @@ public interface ILoginView {
     void showInvalidEmailError();
     void setEmail(@NonNull String email);
     void setPassword(@NonNull String password);
+    void onUserSaved();
 }
