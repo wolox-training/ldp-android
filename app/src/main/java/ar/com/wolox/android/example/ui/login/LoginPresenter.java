@@ -40,6 +40,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
 
         mSharedPreferencesManager.store(Constants.UserCredentials.USER_EMAIL, email);
         mSharedPreferencesManager.store(Constants.UserCredentials.USER_PASSWORD, password);
+        runIfViewAttached(ILoginView::onUserSaved);
     }
 
     /**

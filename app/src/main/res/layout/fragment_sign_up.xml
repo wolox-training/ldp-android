@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/static_spacing_medium_extra">
+
+    <EditText
+        android:id="@+id/fragment_sign_up_email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/fragment_sign_up_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/static_spacing_medium"
+        android:hint="@string/login_password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/fragment_sign_up_confirm_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/static_spacing_medium"
+        android:hint="@string/sign_up_confirm_password"
+        android:inputType="textPassword" />
+
+    <ar.com.wolox.android.example.customViews.TermsAndConditions
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_huge_height" />
+
+    <Button
+        android:id="@+id/fragment_sign_up_join_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_join"
+        android:textColor="@android:color/white"
+        android:theme="@style/bg_login_sign_up" />
+
+</LinearLayout>
