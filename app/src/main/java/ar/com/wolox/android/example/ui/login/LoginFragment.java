@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import javax.annotation.Nonnull;
-
 import ar.com.wolox.android.R;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
@@ -54,7 +52,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void setEmail(@Nonnull String email) {
+    public void setEmail(@NonNull String email) {
         mEmailInput.setText(email);
     }
 
