@@ -41,7 +41,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void setListeners() {
         super.setListeners();
         mLoginButton.setOnClickListener(view -> onLoginClicked());
-
         mSignUpButton.setOnClickListener(view -> openSignUpActivity());
     }
 
