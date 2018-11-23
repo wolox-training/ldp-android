@@ -2,11 +2,14 @@ package ar.com.wolox.android.example.ui.login;
 
 import android.support.annotation.NonNull;
 import android.util.Patterns;
+import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import ar.com.wolox.android.R;
+import ar.com.wolox.android.example.ui.home.MainActivity;
+import ar.com.wolox.android.example.ui.signup.SignUpActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
 import butterknife.BindView;
 
@@ -38,6 +41,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void setListeners() {
         super.setListeners();
         mLoginButton.setOnClickListener(view -> onLoginClicked());
+        mSignUpButton.setOnClickListener(view -> openSignUpActivity());
     }
 
     @Override
@@ -72,5 +76,22 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         } else {
             getPresenter().login(email, password);
         }
+    }
+
+    @Override
+    public void onUserSaved() {
+        Intent homeIntent = new Intent(getContext(), MainActivity.class);
+        startActivity(homeIntent);
+
+        try {
+            getActivity().finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void openSignUpActivity() {
+        Intent intent = new Intent(getContext(), SignUpActivity.class);
+        startActivity(intent);
     }
 }

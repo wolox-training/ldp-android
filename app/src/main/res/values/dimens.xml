@@ -30,6 +30,9 @@
     <dimen name="spacing_largest">54dp</dimen>
     <dimen name="spacing_largest_extra">64dp</dimen>
 
+    <!-- Elevation -->
+    <dimen name="static_elevation_small">4dp</dimen>
+
     <!-- Anti-spacing -->
     <dimen name="negative_spacing_medium">-4dp</dimen>
 
@@ -44,6 +47,8 @@
     <dimen name="font_large_extra">20sp</dimen>
     <dimen name="font_big">22sp</dimen>
     <dimen name="font_huge">24sp</dimen>
+
+    <dimen name="dimen_huge_height">48dp</dimen>
 
     <!-- Add your custom dimens here -->
 </resources>
