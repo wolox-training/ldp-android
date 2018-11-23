@@ -24,8 +24,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void init() {
-    }
+    public void init() {}
 
     @Override
     public void populate() {
@@ -38,9 +37,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         super.setListeners();
         mLoginButton.setOnClickListener(view ->
                 getPresenter().login(mEmailInput.getText().toString(), mPasswordInput.getText().toString()));
-
-        mSignUpButton.setOnClickListener(view -> {
-        });
     }
 
     @Override
