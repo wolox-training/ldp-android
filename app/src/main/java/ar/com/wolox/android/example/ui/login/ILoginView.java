@@ -8,4 +8,5 @@ public interface ILoginView {
     void showInvalidEmailError();
     void setEmail(String email);
     void setPassword(String password);
+    void onUserSaved();
 }
