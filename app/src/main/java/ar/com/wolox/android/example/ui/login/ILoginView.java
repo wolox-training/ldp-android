@@ -9,7 +9,6 @@ public interface ILoginView {
     void showEmptyFormErrorOnEmail();
     void showInvalidEmailError();
     void setEmail(@NonNull String email);
-    void setPassword(@NonNull String password);
     void onUserLoggedIn();
     void onWrongEmailOrPassword();
     void showProgress();
