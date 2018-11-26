@@ -6,9 +6,15 @@ import android.support.annotation.NonNull;
  */
 public interface ILoginView {
 
-    void showEmptyFormError();
+    void showEmptyFormErrorOnEmail();
     void showInvalidEmailError();
     void setEmail(@NonNull String email);
     void setPassword(@NonNull String password);
-    void onUserSaved();
+    void onUserLoggedIn();
+    void onWrongEmailOrPassword();
+    void showProgress();
+    void hideProgress();
+    void showNoConnectionError();
+    void showUnexpectedError();
+    void showEmptyFormErrorOnPassword();
 }
