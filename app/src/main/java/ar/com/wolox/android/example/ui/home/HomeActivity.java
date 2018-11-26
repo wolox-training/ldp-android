@@ -14,5 +14,5 @@ public class HomeActivity extends WolmoActivity {
     }
 
     @Override
-    protected void init() { }
+    protected void init() {}
 }
