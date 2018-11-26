@@ -80,7 +80,8 @@
 
     </LinearLayout>
 
-    <ar.com.wolox.android.example.customViews.TermsAndConditions
+    <TextView
+        android:id="@+id/fragment_login_terms_and_conditions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/static_spacing_medium_extra"

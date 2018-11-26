@@ -29,9 +29,12 @@
         android:hint="@string/sign_up_confirm_password"
         android:inputType="textPassword" />
 
-    <ar.com.wolox.android.example.customViews.TermsAndConditions
+    <TextView
+        android:id="@+id/fragment_sign_up_terms_and_conditions"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_huge_height" />
+        android:layout_height="@dimen/dimen_huge_height"
+        android:gravity="center"
+        android:text="@string/login_terms" />
 
     <Button
         android:id="@+id/fragment_sign_up_join_button"

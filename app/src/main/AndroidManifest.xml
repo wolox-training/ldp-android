@@ -23,7 +23,7 @@
 
         <activity android:name=".example.ui.signup.SignUpActivity" />
 
-        <activity android:name=".example.ui.home.MainActivity" />
+        <activity android:name=".example.ui.home.HomeActivity" />
 
     </application>
 

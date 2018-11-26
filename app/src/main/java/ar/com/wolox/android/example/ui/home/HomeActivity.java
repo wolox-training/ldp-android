@@ -6,15 +6,13 @@ import ar.com.wolox.wolmo.core.activity.WolmoActivity;
 /**
  * Application home;
  */
-public class MainActivity extends WolmoActivity {
+public class HomeActivity extends WolmoActivity {
 
     @Override
     protected int layout() {
-        return R.layout.activity_main;
+        return R.layout.activity_home;
     }
 
     @Override
-    protected void init() {
-
-    }
+    protected void init() { }
 }
