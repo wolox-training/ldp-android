@@ -1,8 +1,12 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.support.annotation.NonNull;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import javax.annotation.Nonnull;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
@@ -35,8 +39,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void setListeners() {
         super.setListeners();
-        mLoginButton.setOnClickListener(view ->
-                getPresenter().login(mEmailInput.getText().toString(), mPasswordInput.getText().toString()));
+        mLoginButton.setOnClickListener(view -> onLoginClicked());
     }
 
     @Override
@@ -51,12 +54,25 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void setEmail(String email) {
+    public void setEmail(@Nonnull String email) {
         mEmailInput.setText(email);
     }
 
     @Override
-    public void setPassword(String password) {
+    public void setPassword(@NonNull String password) {
         mPasswordInput.setText(password);
+    }
+
+    void onLoginClicked() {
+        String email = mEmailInput.getText().toString();
+        String password = mPasswordInput.getText().toString();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            showEmptyFormError();
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            showInvalidEmailError();
+        } else {
+            getPresenter().login(email, password);
+        }
     }
 }
