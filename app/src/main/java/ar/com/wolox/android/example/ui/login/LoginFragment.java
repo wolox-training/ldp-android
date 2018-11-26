@@ -1,14 +1,18 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import javax.inject.Inject;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.home.MainActivity;
 import ar.com.wolox.android.example.ui.signup.SignUpActivity;
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment;
+import ar.com.wolox.wolmo.core.util.ToastFactory;
 import butterknife.BindView;
 
 /**
@@ -21,6 +25,10 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @BindView(R.id.fragment_login_email_input) EditText mEmailInput;
     @BindView(R.id.fragment_login_password_input) EditText mPasswordInput;
 
+    @Inject ToastFactory mToastFactory;
+
+    ProgressDialog mProgressDialog;
+
     @Override
     public int layout() {
         return R.layout.fragment_login;
@@ -30,9 +38,34 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void init() {}
 
     @Override
+    public void setUi(View v) {
+        super.setUi(v);
+        mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage(getString(R.string.login_wait_a_moment));
+    }
+
+    @Override
     public void populate() {
         super.populate();
-        getPresenter().loadEmailAndPassword();
+
+        if (getPresenter().isUserLoggedIn()) {
+            onUserLoggedIn();
+
+            try {
+                getActivity().finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        getPresenter().loadEmail();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getPresenter().storeEmail(mEmailInput.getText().toString());
     }
 
     @Override
@@ -45,8 +78,9 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void showEmptyFormError() {
-        Toast.makeText(getContext(), R.string.login_empty_form, Toast.LENGTH_LONG).show();
+    public void showEmptyFormErrorOnEmail() {
+        mEmailInput.requestFocus();
+        mEmailInput.setError(getString(R.string.login_empty_form));
     }
 
     @Override
@@ -66,7 +100,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void onUserSaved() {
+    public void onUserLoggedIn() {
         Intent homeIntent = new Intent(getContext(), MainActivity.class);
         startActivity(homeIntent);
 
@@ -75,6 +109,41 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onWrongEmailOrPassword() {
+        mToastFactory.show(R.string.login_invalid_credentials);
+    }
+
+    @Override
+    public void showProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.show();
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showNoConnectionError() {
+        mToastFactory.showLong(R.string.login_user_no_connected);
+    }
+
+    @Override
+    public void showUnexpectedError() {
+        mToastFactory.show(R.string.app_unexpected_error);
+    }
+
+    @Override
+    public void showEmptyFormErrorOnPassword() {
+        mPasswordInput.requestFocus();
+        mPasswordInput.setError(getString(R.string.login_empty_form));
     }
 
     void openSignUpActivity() {
