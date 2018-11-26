@@ -95,11 +95,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void setPassword(String password) {
-        mPasswordInput.setText(password);
-    }
-
-    @Override
     public void onUserLoggedIn() {
         Intent homeIntent = new Intent(getContext(), MainActivity.class);
         startActivity(homeIntent);
