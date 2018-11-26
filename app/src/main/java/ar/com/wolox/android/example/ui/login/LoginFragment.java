@@ -45,6 +45,9 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     @Override
     public void setUi(View v) {
         super.setUi(v);
+
+        mTermsAndConditions.setMovementMethod(LinkMovementMethod.getInstance());
+
         mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.login_wait_a_moment));
@@ -71,12 +74,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void onPause() {
         super.onPause();
         getPresenter().storeEmail(mEmailInput.getText().toString());
-    }
-
-    @Override
-    public void setUi(View v) {
-        super.setUi(v);
-        mTermsAndConditions.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
@@ -165,7 +162,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         String password = mPasswordInput.getText().toString();
 
         if (email.isEmpty() || password.isEmpty()) {
-            showEmptyFormError();
+            showEmptyFormErrorOnEmail();
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             showInvalidEmailError();
         } else {
