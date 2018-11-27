@@ -1,7 +1,6 @@
 package ar.com.wolox.android.example.ui.signup;
 
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,7 +28,6 @@ public class SignUpFragment extends WolmoFragment {
     @Override
     public void setUi(View v) {
         super.setUi(v);
-        Log.d("ldpenal", "setUi: ");
         mTermsAndConditions.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
