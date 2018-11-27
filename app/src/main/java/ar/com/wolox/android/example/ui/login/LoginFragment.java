@@ -101,11 +101,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void setPassword(@NonNull String password) {
-        mPasswordInput.setText(password);
-    }
-
-    @Override
     public void onUserLoggedIn() {
         Intent homeIntent = new Intent(getContext(), HomeActivity.class);
         startActivity(homeIntent);
@@ -161,8 +156,12 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         String email = mEmailInput.getText().toString();
         String password = mPasswordInput.getText().toString();
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() && password.isEmpty()) {
             showEmptyFormErrorOnEmail();
+        } else if (email.isEmpty()) {
+            showEmptyFormErrorOnEmail();
+        } else if (password.isEmpty()) {
+            showEmptyFormErrorOnPassword();
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             showInvalidEmailError();
         } else {
