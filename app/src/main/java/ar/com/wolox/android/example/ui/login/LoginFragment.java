@@ -8,9 +8,9 @@ import android.text.method.LinkMovementMethod;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import javax.inject.Inject;
-import android.widget.TextView;
 
 import ar.com.wolox.android.R;
 import ar.com.wolox.android.example.ui.home.HomeActivity;
