@@ -40,7 +40,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * @param email    Input email
      * @param password Input password
      */
-    void login(@NonNull String email, @NonNull String password) {
+    protected void login(@NonNull String email, @NonNull String password) {
         runIfViewAttached(ILoginView::showProgress);
 
         mUserService.login(email, password).enqueue(new SimpleNetworkCallback<List<User>>() {
@@ -90,7 +90,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     /**
      * Load saved email & password
      */
-    void loadEmail() {
+    protected void loadEmail() {
         runIfViewAttached((view) -> view.setEmail(mSharedPreferencesManager.get(Constants.UserCredentials.USER_EMAIL, "")));
     }
 
@@ -99,16 +99,16 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      *
      * @return Whether a user is logged in;
      */
-    boolean isUserLoggedIn() {
+    protected boolean isUserLoggedIn() {
         return mSharedPreferencesManager.get(Constants.UserCredentials.USER_LOGGED_IN, false);
     }
 
     /**
      * Store user's email on SharedPreferences;
      *
-     * @param email
+     * @param email Store email typed by user on UI;
      */
-    void storeEmail(@NonNull String email) {
+    protected void storeEmail(@NonNull String email) {
         mSharedPreferencesManager.store(Constants.UserCredentials.USER_EMAIL, email);
     }
 }
