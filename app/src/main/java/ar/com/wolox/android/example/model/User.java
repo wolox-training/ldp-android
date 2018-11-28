@@ -9,6 +9,7 @@ public class User {
     private String email;
     private String password;
 
+    @NonNull
     public String getEmail() {
         return email;
     }
@@ -17,6 +18,7 @@ public class User {
         this.email = email;
     }
 
+    @NonNull
     public String getPassword() {
         return password;
     }
