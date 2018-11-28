@@ -104,7 +104,6 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void onUserLoggedIn() {
         Intent homeIntent = new Intent(getContext(), HomeActivity.class);
         startActivity(homeIntent);
-
         try {
             getActivity().finish();
         } catch (Exception e) {

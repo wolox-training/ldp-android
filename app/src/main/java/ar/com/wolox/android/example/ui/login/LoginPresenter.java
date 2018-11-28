@@ -24,6 +24,7 @@ import okhttp3.ResponseBody;
 public class LoginPresenter extends BasePresenter<ILoginView> {
 
     private static final String TAG = LoginPresenter.class.getSimpleName();
+    private static final String DEFAULT_EMAIL = "";
 
     private SharedPreferencesManager mSharedPreferencesManager;
     private UserService mUserService;
@@ -54,7 +55,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 }
 
                 User user = users.get(0);
-                LoginPresenter.this.storeEmail(user.getEmail());
+                storeEmail(user.getEmail());
                 mSharedPreferencesManager.store(Constants.UserCredentials.USER_LOGGED_IN, true);
 
                 runIfViewAttached(ILoginView::onUserLoggedIn);
@@ -91,7 +92,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * Load saved email & password
      */
     protected void loadEmail() {
-        runIfViewAttached((view) -> view.setEmail(mSharedPreferencesManager.get(Constants.UserCredentials.USER_EMAIL, "")));
+        runIfViewAttached((view) -> view.setEmail(mSharedPreferencesManager.get(Constants.UserCredentials.USER_EMAIL, DEFAULT_EMAIL)));
     }
 
     /**
