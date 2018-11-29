@@ -5,6 +5,10 @@ import ar.com.wolox.android.example.di.DaggerAppComponent
 import ar.com.wolox.wolmo.core.WolmoApplication
 import ar.com.wolox.wolmo.networking.di.DaggerNetworkingComponent
 import ar.com.wolox.wolmo.networking.di.NetworkingComponent
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipelineConfig
+import com.facebook.imagepipeline.listener.RequestListener
+import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.google.gson.FieldNamingPolicy
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.squareup.leakcanary.LeakCanary
@@ -22,6 +26,8 @@ class NewsApplication : WolmoApplication() {
             return
         }
         LeakCanary.install(this)
+
+        setupFrescoLib()
     }
 
     override fun applicationInjector(): AndroidInjector<NewsApplication> {
@@ -33,7 +39,7 @@ class NewsApplication : WolmoApplication() {
     private fun buildDaggerNetworkingComponent(): NetworkingComponent {
         val builder = DaggerNetworkingComponent.builder().baseUrl(
                 BaseConfiguration.BASE_URL)
-                .gsonNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .gsonNamingPolicy(FieldNamingPolicy.IDENTITY)
 
         if (BuildConfig.DEBUG) {
             builder.okHttpInterceptors(
@@ -51,5 +57,21 @@ class NewsApplication : WolmoApplication() {
      */
     private fun buildHttpLoggingInterceptor(newLevel: HttpLoggingInterceptor.Level): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply { this.level = newLevel }
+    }
+
+    private fun setupFrescoLib() {
+        val requestListeners = HashSet<RequestListener>()
+        requestListeners.add(RequestLoggingListener())
+
+        var configuration: ImagePipelineConfig? = null
+
+        if (BuildConfig.DEBUG) {
+            configuration = ImagePipelineConfig
+                    .newBuilder(this)
+                    .setRequestListeners(requestListeners)
+                    .build()
+        }
+
+        Fresco.initialize(this, configuration)
     }
 }
