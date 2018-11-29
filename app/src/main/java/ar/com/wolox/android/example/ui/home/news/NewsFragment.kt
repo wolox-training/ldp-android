@@ -30,6 +30,8 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     override fun setUi(v: View?) {
         super.setUi(v)
         mRefreshNewsSwipe.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent)
+
+        mCreateNewButton.attachToRecyclerView(mNewsList)
     }
 
     override fun layout(): Int = R.layout.fragment_news
@@ -70,7 +72,5 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         mToastFactory.showLong(R.string.home_news_not_found)
     }
 
-    override fun appendNews(newsList: List<New>) {
-        mNewsAdapter.appendNews(newsList)
-    }
+    override fun appendNews(newsList: List<New>) = mNewsAdapter.appendNews(newsList)
 }
