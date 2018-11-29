@@ -1,4 +1,11 @@
 package ar.com.wolox.android.example.ui.home.news
 
-// TODO: implement logic
-interface INewsView
+import ar.com.wolox.android.example.model.New
+
+interface INewsView {
+
+    fun showRefreshing()
+    fun hideRefreshing()
+    fun onNewsNotFound()
+    fun appendNews(newsList: List<New>)
+}

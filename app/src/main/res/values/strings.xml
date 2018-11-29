@@ -35,6 +35,7 @@
     <string name="home_news">News</string>
     <string name="home_profile">Profile</string>
     <string name="home_wolox">Wolox</string>
+    <string name="home_news_not_found">Not found news</string>
 
     <string name="app_not_found">No available applications to proceed</string>
     <string name="app_unexpected_error">Oops! Something went wrong.</string>
