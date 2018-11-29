@@ -2,6 +2,7 @@ package ar.com.wolox.android.example.ui.home.news
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.New
@@ -14,6 +15,8 @@ import javax.inject.Inject
  * Fragment for news feature;
  */
 class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INewsView {
+
+    val TAG = NewsFragment::class.java.simpleName
 
     @Inject
     lateinit var mNewsAdapter: NewsAdapter
@@ -45,12 +48,21 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
         }
 
         mNewsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            var scrollDiff: Int = 0
+
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    // TODO("Ask for more news")
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && scrollDiff > 0 && !mRefreshNewsSwipe.isRefreshing) {
+                    Log.d(TAG, "We should ask for more information only if there is pagination")
+                    showRefreshing()
+                    presenter.requestNews()
                 }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                scrollDiff = dy
             }
         })
     }

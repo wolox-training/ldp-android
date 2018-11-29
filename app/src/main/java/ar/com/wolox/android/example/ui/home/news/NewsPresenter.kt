@@ -16,8 +16,6 @@ class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitS
                 .enqueue(networkCallback {
                     onResponseSuccessful { newsList ->
                         runIfViewAttached { iNewsView ->
-                            iNewsView.hideRefreshing()
-
                             newsList?.let {
                                 if (newsList.isNotEmpty()) {
                                     iNewsView.appendNews(it)
@@ -25,6 +23,8 @@ class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitS
                                     iNewsView.onNewsNotFound()
                                 }
                             }
+
+                            iNewsView.hideRefreshing()
                         }
                     }
 
