@@ -8,4 +8,7 @@ interface INewsView {
     fun hideRefreshing()
     fun onNewsNotFound()
     fun appendNews(newsList: List<New>)
+    fun setNews(newsList: List<New>)
+    fun onNoConnection()
+    fun onUnexpectedError()
 }

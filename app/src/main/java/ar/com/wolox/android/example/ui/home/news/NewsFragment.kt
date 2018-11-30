@@ -1,11 +1,10 @@
 package ar.com.wolox.android.example.ui.home.news
 
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.New
+import ar.com.wolox.android.example.utils.InfiniteScroll
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.ToastFactory
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -17,6 +16,7 @@ import javax.inject.Inject
 class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INewsView {
 
     val TAG = NewsFragment::class.java.simpleName
+    private val VIEW_THRESHOLD = 10
 
     @Inject
     lateinit var mNewsAdapter: NewsAdapter
@@ -44,32 +44,26 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
         mRefreshNewsSwipe.setOnRefreshListener {
             showRefreshing()
-            presenter.requestNews()
+            presenter.requestNews(paginated = false)
         }
 
-        mNewsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            var scrollDiff: Int = 0
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && scrollDiff > 0 && !mRefreshNewsSwipe.isRefreshing) {
-                    Log.d(TAG, "We should ask for more information only if there is pagination")
-                    showRefreshing()
-                    presenter.requestNews()
-                }
+        mNewsList.addOnScrollListener(object : InfiniteScroll({
+            showRefreshing()
+            presenter.requestNews(paginated = true)
+        }) {
+            override fun hasMore(): Boolean {
+                val layoutManager = mNewsList.layoutManager as LinearLayoutManager
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                return (presenter.hasMore()) && (lastVisibleItem >= (layoutManager.itemCount - VIEW_THRESHOLD))
             }
 
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                scrollDiff = dy
-            }
+            override fun isLoading(): Boolean = mRefreshNewsSwipe.isRefreshing
         })
     }
 
     override fun populate() {
         super.populate()
-        presenter.requestNews()
+        presenter.requestNews(paginated = false)
     }
 
     override fun showRefreshing() {
@@ -85,4 +79,10 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     override fun appendNews(newsList: List<New>) = mNewsAdapter.appendNews(newsList)
+
+    override fun setNews(newsList: List<New>) = mNewsAdapter.setNews(newsList)
+
+    override fun onNoConnection() = mToastFactory.showLong(R.string.app_user_not_connected)
+
+    override fun onUnexpectedError() = mToastFactory.showLong(R.string.app_unexpected_error)
 }

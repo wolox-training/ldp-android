@@ -28,4 +28,10 @@ class NewsAdapter @Inject constructor() : RecyclerView.Adapter<NewsHolder>() {
         mNewsList.addAll(news)
         notifyDataSetChanged()
     }
+
+    fun setNews(news: List<New>) {
+        mNewsList = ArrayList()
+        mNewsList.addAll(news)
+        notifyDataSetChanged()
+    }
 }
