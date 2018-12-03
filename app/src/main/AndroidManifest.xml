@@ -26,6 +26,10 @@
 
         <activity android:name=".example.ui.home.HomeActivity" />
 
+        <activity android:name=".example.ui.detail.NewsDetailActivity" />
+
+        <activity android:name=".example.ui.detail.NewFullScreenActivity" />
+
     </application>
 
 </manifest>

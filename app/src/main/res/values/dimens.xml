@@ -54,5 +54,7 @@
     <dimen name="img_medium">50dp</dimen>
     <dimen name="img_small">35dp</dimen>
 
+    <dimen name="dimen_large_extra">32dp</dimen>
+
     <!-- Add your custom dimens here -->
 </resources>

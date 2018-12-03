@@ -2,7 +2,10 @@ package ar.com.wolox.android.example.network
 
 import ar.com.wolox.android.example.model.New
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
@@ -19,4 +22,10 @@ interface NewsService {
     fun getNewsByUrl(
         @Url url: String?
     ): Call<List<New>>
+
+    @GET("/news/{id}")
+    fun getNewsById(@Path("id") id: Int): Call<New>
+
+    @PUT("/news/{id}")
+    fun likeNew(@Path("id") id: Int, @Body new: New): Call<New>
 }

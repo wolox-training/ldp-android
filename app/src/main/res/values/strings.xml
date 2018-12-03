@@ -37,7 +37,14 @@
     <string name="home_wolox">Wolox</string>
     <string name="home_news_not_found">Not found news</string>
 
+    <!-- News detail -->
+    <string name="news_detail_new_no_found">New not found</string>
+    <string name="news_detail_post">Post</string>
+
     <string name="app_not_found">No available applications to proceed</string>
     <string name="app_unexpected_error">Oops! Something went wrong.</string>
     <string name="app_user_not_connected">It looks like you are no connected, check your connection and try again</string>
+
+    <string name="design_placeholder_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec diam ligula, vulputate eu lectus nec, rutrum vulputate neque. Nulla facilisi. Nullam id finibus lorem, at ornare neque.</string>
+
 </resources>
