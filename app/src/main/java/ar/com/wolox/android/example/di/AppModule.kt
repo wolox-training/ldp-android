@@ -1,5 +1,7 @@
 package ar.com.wolox.android.example.di
 
+import ar.com.wolox.android.example.ui.detail.NewsDetailActivity
+import ar.com.wolox.android.example.ui.detail.NewsDetailFragment
 import ar.com.wolox.android.example.ui.example.ExampleActivity
 import ar.com.wolox.android.example.ui.example.ExampleFragment
 import ar.com.wolox.android.example.ui.home.HomeActivity
@@ -41,4 +43,10 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun profileFragment(): ProfileFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun newsDetailActivity(): NewsDetailActivity
+
+    @ContributesAndroidInjector
+    internal abstract fun newsDetailFragment(): NewsDetailFragment
 }

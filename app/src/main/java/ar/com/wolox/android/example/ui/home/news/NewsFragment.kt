@@ -1,13 +1,20 @@
 package ar.com.wolox.android.example.ui.home.news
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.New
+import ar.com.wolox.android.example.model.NewChangedEvent
+import ar.com.wolox.android.example.ui.detail.NewsDetailActivity
+import ar.com.wolox.android.example.ui.detail.NewsDetailFragment
 import ar.com.wolox.android.example.utils.InfiniteScroll
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.util.ToastFactory
 import kotlinx.android.synthetic.main.fragment_news.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 /**
@@ -15,12 +22,22 @@ import javax.inject.Inject
  */
 class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INewsView {
 
-    @Inject lateinit var mNewsAdapter: NewsAdapter
     @Inject lateinit var mToastFactory: ToastFactory
+
+    lateinit var mNewsAdapter: NewsAdapter
 
     override fun init() {
         mNewsList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        mNewsAdapter = NewsAdapter(object : INewClickListener {
+            override fun onNewClicked(new: New) {
+                openNewDetail(new)
+            }
+        }, presenter.userLoggedIn())
+
         mNewsList.adapter = mNewsAdapter
+
+        EventBus.getDefault().register(this)
     }
 
     override fun setUi(v: View?) {
@@ -75,7 +92,21 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     override fun onNoConnection() = mToastFactory.showLong(R.string.app_user_not_connected)
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
     override fun onUnexpectedError() = mToastFactory.showLong(R.string.app_unexpected_error)
+
+    fun openNewDetail(new: New) {
+        val newsDetailIntent = Intent(context, NewsDetailActivity::class.java)
+        newsDetailIntent.putExtra(NewsDetailFragment.NEWS_OBJECT, new)
+        startActivity(newsDetailIntent)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onNewChanged(newChangedEvent: NewChangedEvent) = mNewsAdapter.updateNew(newChangedEvent.new)
 
     companion object {
         private const val VIEW_THRESHOLD = 10

@@ -7,14 +7,16 @@ import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.New
 import javax.inject.Inject
 
-class NewsAdapter @Inject constructor() : RecyclerView.Adapter<NewsHolder>() {
+class NewsAdapter @Inject constructor(private val mNewClockListener: INewClickListener, private val mUserLoggedIn: Int) : RecyclerView.Adapter<NewsHolder>() {
 
     private var mNewsList: MutableList<New> = ArrayList()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): NewsHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
         val itemView = layoutInflater.inflate(R.layout.item_new, viewGroup, false)
-        return NewsHolder(itemView)
+        val holder = NewsHolder(itemView, mNewClockListener)
+        holder.mUserLoggedIn = mUserLoggedIn
+        return holder
     }
 
     override fun getItemCount() = mNewsList.size
@@ -30,5 +32,11 @@ class NewsAdapter @Inject constructor() : RecyclerView.Adapter<NewsHolder>() {
         mNewsList = ArrayList()
         mNewsList.addAll(news)
         notifyDataSetChanged()
+    }
+
+    fun updateNew(new: New) {
+        val indexOfNew = mNewsList.indexOf(new)
+        mNewsList[indexOfNew] = new
+        notifyItemChanged(indexOfNew)
     }
 }
