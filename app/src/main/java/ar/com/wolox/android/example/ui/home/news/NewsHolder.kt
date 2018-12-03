@@ -5,25 +5,27 @@ import android.view.View
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.New
 import kotlinx.android.synthetic.main.item_new.view.*
-import org.joda.time.format.DateTimeFormat
-import org.ocpsoft.prettytime.PrettyTime
 
-class NewsHolder(view: View) : RecyclerView.ViewHolder(view) {
+class NewsHolder(view: View, private val mOnNewClickListener: INewClickListener) : RecyclerView.ViewHolder(view) {
+
+    private lateinit var mNew: New
+    var mUserLoggedIn: Int = -1
+
+    init {
+        itemView.setOnClickListener {
+            mOnNewClickListener.onNewClicked(mNew)
+        }
+    }
 
     fun bindHolder(item: New) {
-        itemView.mNewTitle.text = item.title
+        mNew = item
+
+        itemView.mNewTitleText.text = item.title
         itemView.mNewText.text = item.text
 
-        val localDate: java.util.Date = DateTimeFormat
-                .forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .withLocale(java.util.Locale.getDefault())
-                .parseLocalDate(item.createdAt)
-                .toDate()
+        itemView.mTimeAgoText.text = ar.com.wolox.android.example.utils.DateUtils.toDuration(item.createdAt)
 
-        val timeAgo = PrettyTime().format(localDate)
-        itemView.mTimeAgo.text = timeAgo
-
-        itemView.mLikeIcon.setImageResource(R.drawable.ic_like_off)
+        itemView.mLikeIcon.setImageResource(if (item.likes.contains(mUserLoggedIn)) R.drawable.ic_like_on else R.drawable.ic_like_off)
         itemView.mNewImage.setImageURI(item.picture)
     }
 }

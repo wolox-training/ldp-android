@@ -2,7 +2,9 @@ package ar.com.wolox.android.example.ui.home.news
 
 import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.network.NewsService
+import ar.com.wolox.android.example.utils.Constants
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
+import ar.com.wolox.wolmo.core.util.SharedPreferencesManager
 import ar.com.wolox.wolmo.networking.retrofit.RetrofitServices
 import okhttp3.Headers
 import retrofit2.Call
@@ -11,9 +13,13 @@ import retrofit2.Response
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitServices) : BasePresenter<INewsView>() {
+class NewsPresenter @Inject constructor(
+    private val mRetrofitServices: RetrofitServices,
+    private val mSharedPreferencesManager: SharedPreferencesManager
+) : BasePresenter<INewsView>() {
 
     val TAG = NewsPresenter::class.java.simpleName
+    val EMPTY_USER = -1
 
     var nextPage: String? = null
 
@@ -85,4 +91,6 @@ class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitS
             }
         })
     }
+
+    fun userLoggedIn(): Int = mSharedPreferencesManager.get(Constants.UserCredentials.USER_ID, EMPTY_USER)
 }

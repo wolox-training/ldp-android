@@ -10,7 +10,7 @@ public class Constants {
      */
     public static class UserCredentials {
         public static final String USER_EMAIL = "user_email";
-        public static final String USER_PASSWORD = "user_password";
+        public static final String USER_ID = "user_id";
         public static final String USER_LOGGED_IN = "user_logged_in";
     }
 }

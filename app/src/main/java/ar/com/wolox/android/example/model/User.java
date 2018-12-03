@@ -6,8 +6,19 @@ import android.support.annotation.NonNull;
  * Model for user entity;
  */
 public class User {
+
+    private Integer id;
     private String email;
     private String password;
+
+    @NonNull
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(@NonNull Integer id) {
+        this.id = id;
+    }
 
     @NonNull
     public String getEmail() {
