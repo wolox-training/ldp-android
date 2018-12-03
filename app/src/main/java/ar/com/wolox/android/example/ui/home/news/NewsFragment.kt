@@ -11,5 +11,5 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
 
     override fun init() {}
 
-    override fun layout(): Int = R.layout.fragment_news
+    override fun layout() = R.layout.fragment_news
 }

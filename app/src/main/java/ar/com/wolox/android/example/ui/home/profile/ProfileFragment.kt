@@ -8,5 +8,5 @@ class ProfileFragment @Inject constructor() : WolmoFragment<ProfilePresenter>(),
 
     override fun init() {}
 
-    override fun layout(): Int = R.layout.fragment_profile
+    override fun layout() = R.layout.fragment_profile
 }

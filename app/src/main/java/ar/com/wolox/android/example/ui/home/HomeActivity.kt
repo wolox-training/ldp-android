@@ -13,16 +13,14 @@ import javax.inject.Inject
  */
 class HomeActivity : WolmoActivity() {
 
-    private lateinit var mSimpleFragmentPagerAdapter: SimpleFragmentPagerAdapter
-
     @Inject internal lateinit var mNewsFragment: NewsFragment
     @Inject internal lateinit var mProfileFragment: ProfileFragment
 
-    override fun layout(): Int = R.layout.activity_home
+    private lateinit var mSimpleFragmentPagerAdapter: SimpleFragmentPagerAdapter
+
+    override fun layout() = R.layout.activity_home
 
     override fun init() {
-        setSupportActionBar(mToolbar)
-
         mSimpleFragmentPagerAdapter = SimpleFragmentPagerAdapter(supportFragmentManager)
 
         mSimpleFragmentPagerAdapter.addFragment(mNewsFragment, getString(R.string.home_news))
