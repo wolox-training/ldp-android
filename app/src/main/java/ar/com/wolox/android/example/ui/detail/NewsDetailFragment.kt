@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import ar.com.wolox.android.R
@@ -38,9 +39,8 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
             presenter.getNewById()
         }
 
-        mLikeButton.onClickListener {
-            presenter.likeNew()
-        }
+        mLikeButton.onClickListener { presenter.likeNew() }
+        mNewImage.onClickListener { onImageClicked() }
     }
 
     override fun setUi(v: View?) {
@@ -87,6 +87,12 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
 
     override fun onUnexpectedError() {
         mToastFactory.showLong(R.string.app_unexpected_error)
+    }
+
+    private fun onImageClicked() {
+        val fullScreenIntent = Intent(context, NewFullScreenActivity::class.java)
+        fullScreenIntent.putExtra(NewFullScreenActivity.NEWS_PICTURE, presenter.new.picture)
+        startActivity(fullScreenIntent)
     }
 
     companion object {

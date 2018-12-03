@@ -1,5 +1,6 @@
 package ar.com.wolox.android.example.di
 
+import ar.com.wolox.android.example.ui.detail.NewFullScreenActivity
 import ar.com.wolox.android.example.ui.detail.NewsDetailActivity
 import ar.com.wolox.android.example.ui.detail.NewsDetailFragment
 import ar.com.wolox.android.example.ui.example.ExampleActivity
@@ -49,4 +50,7 @@ abstract class AppModule {
 
     @ContributesAndroidInjector
     internal abstract fun newsDetailFragment(): NewsDetailFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun newsFullScreenActivity(): NewFullScreenActivity
 }
