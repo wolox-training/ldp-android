@@ -15,14 +15,11 @@ import javax.inject.Inject
  */
 class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INewsView {
 
+    @Inject lateinit var mNewsAdapter: NewsAdapter
+    @Inject lateinit var mToastFactory: ToastFactory
+
     val TAG = NewsFragment::class.java.simpleName
     private val VIEW_THRESHOLD = 10
-
-    @Inject
-    lateinit var mNewsAdapter: NewsAdapter
-
-    @Inject
-    lateinit var mToastFactory: ToastFactory
 
     override fun init() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

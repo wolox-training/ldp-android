@@ -11,10 +11,7 @@ import retrofit2.Response
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-// TODO: implement logic
 class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitServices) : BasePresenter<INewsView>() {
-
-    val TAG = NewsPresenter::class.java.simpleName
 
     var nextPage: String? = null
 
