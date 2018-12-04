@@ -1,12 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/activity_main_fragment_container"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_huge_extra_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/static_spacing_medium_extra"
+        android:paddingEnd="@dimen/static_spacing_medium_extra">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_huge_height"
+            android:layout_height="@dimen/dimen_huge_height"
+            android:layout_gravity="center_vertical"
+            android:scaleType="center"
+            android:src="@drawable/img_wolox_logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/static_spacing_medium_extra"
+            android:gravity="center_vertical"
+            android:text="@string/home_wolox"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_large"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/mTabLayout"
+        style="@style/home_tabs_appearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_tiniest"
+        android:background="@android:color/darker_gray" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
