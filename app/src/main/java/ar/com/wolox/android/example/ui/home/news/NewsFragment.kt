@@ -18,12 +18,8 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     @Inject lateinit var mNewsAdapter: NewsAdapter
     @Inject lateinit var mToastFactory: ToastFactory
 
-    val TAG = NewsFragment::class.java.simpleName
-    private val VIEW_THRESHOLD = 10
-
     override fun init() {
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        mNewsList.layoutManager = layoutManager
+        mNewsList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mNewsList.adapter = mNewsAdapter
     }
 
@@ -51,7 +47,7 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
             override fun hasMore(): Boolean {
                 val layoutManager = mNewsList.layoutManager as LinearLayoutManager
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                return (presenter.hasMore()) && (lastVisibleItem >= (layoutManager.itemCount - VIEW_THRESHOLD))
+                return presenter.hasMore() && lastVisibleItem >= (layoutManager.itemCount - VIEW_THRESHOLD)
             }
 
             override fun isLoading(): Boolean = mRefreshNewsSwipe.isRefreshing
@@ -64,16 +60,14 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     }
 
     override fun showRefreshing() {
-        mRefreshNewsSwipe?.isRefreshing = true
+        mRefreshNewsSwipe.isRefreshing = true
     }
 
     override fun hideRefreshing() {
-        mRefreshNewsSwipe?.isRefreshing = false
+        mRefreshNewsSwipe.isRefreshing = false
     }
 
-    override fun onNewsNotFound() {
-        mToastFactory.showLong(R.string.home_news_not_found)
-    }
+    override fun onNewsNotFound() = mToastFactory.showLong(R.string.home_news_not_found)
 
     override fun appendNews(newsList: List<New>) = mNewsAdapter.appendNews(newsList)
 
@@ -82,4 +76,8 @@ class NewsFragment @Inject constructor() : WolmoFragment<NewsPresenter>(), INews
     override fun onNoConnection() = mToastFactory.showLong(R.string.app_user_not_connected)
 
     override fun onUnexpectedError() = mToastFactory.showLong(R.string.app_unexpected_error)
+
+    companion object {
+        private const val VIEW_THRESHOLD = 10
+    }
 }

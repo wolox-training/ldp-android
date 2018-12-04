@@ -7,6 +7,7 @@ import ar.com.wolox.android.example.model.New
 import kotlinx.android.synthetic.main.item_new.view.*
 import org.joda.time.format.DateTimeFormat
 import org.ocpsoft.prettytime.PrettyTime
+import java.util.Locale
 
 class NewsHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -14,14 +15,13 @@ class NewsHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.mNewTitle.text = item.title
         itemView.mNewText.text = item.text
 
-        val localDate: java.util.Date = DateTimeFormat
-                .forPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .withLocale(java.util.Locale.getDefault())
+        val localDate = DateTimeFormat
+                .forPattern(itemView.context.getString(R.string.app_date_format))
+                .withLocale(Locale.getDefault())
                 .parseLocalDate(item.createdAt)
                 .toDate()
 
-        val timeAgo = PrettyTime().format(localDate)
-        itemView.mTimeAgo.text = timeAgo
+        itemView.mTimeAgo.text = PrettyTime().format(localDate)
 
         itemView.mLikeIcon.setImageResource(R.drawable.ic_like_off)
         itemView.mNewImage.setImageURI(item.picture)

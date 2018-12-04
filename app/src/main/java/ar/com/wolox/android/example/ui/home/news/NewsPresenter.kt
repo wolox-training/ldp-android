@@ -15,7 +15,7 @@ class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitS
 
     var nextPage: String? = null
 
-    fun hasMore(): Boolean = nextPage != null
+    fun hasMore() = nextPage != null
 
     fun requestNews(paginated: Boolean) {
         val newsService = mRetrofitServices.getService(NewsService::class.java)
@@ -25,7 +25,7 @@ class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitS
             return
         }
 
-        val callable = if (!paginated) newsService.getNews() else newsService.getNewsByUrl(url = nextPage!!)
+        val callable = if (!paginated) newsService.getNews() else newsService.getNewsByUrl(nextPage!!)
 
         callable.enqueue(object : Callback<List<New>> {
             override fun onFailure(call: Call<List<New>>, error: Throwable?) {

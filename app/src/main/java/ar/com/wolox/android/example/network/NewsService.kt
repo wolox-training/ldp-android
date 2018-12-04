@@ -17,6 +17,6 @@ interface NewsService {
 
     @GET
     fun getNewsByUrl(
-        @Url url: String?
+        @Url url: String
     ): Call<List<New>>
 }

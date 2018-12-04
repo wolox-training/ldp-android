@@ -40,4 +40,5 @@
     <string name="app_not_found">No available applications to proceed</string>
     <string name="app_unexpected_error">Oops! Something went wrong.</string>
     <string name="app_user_not_connected">It looks like you are no connected, check your connection and try again</string>
+    <string name="app_date_format">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
 </resources>

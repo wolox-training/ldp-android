@@ -17,12 +17,9 @@ class NewsAdapter @Inject constructor() : RecyclerView.Adapter<NewsHolder>() {
         return NewsHolder(itemView)
     }
 
-    override fun getItemCount(): Int = mNewsList.size
+    override fun getItemCount() = mNewsList.size
 
-    override fun onBindViewHolder(holder: NewsHolder, index: Int) {
-        val item = mNewsList[index]
-        holder.bindHolder(item)
-    }
+    override fun onBindViewHolder(holder: NewsHolder, index: Int) = holder.bindHolder(mNewsList[index])
 
     fun appendNews(news: List<New>) {
         mNewsList.addAll(news)
