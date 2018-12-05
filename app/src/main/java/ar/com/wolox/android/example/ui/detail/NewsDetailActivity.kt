@@ -10,7 +10,6 @@ class NewsDetailActivity : WolmoActivity() {
     @Inject lateinit var mNewsDetailFragment: NewsDetailFragment
 
     private lateinit var mFragmentExtras: Bundle
-    private val TAG = NewsDetailActivity::class.java.simpleName
 
     override fun init() {
         mNewsDetailFragment.arguments = mFragmentExtras

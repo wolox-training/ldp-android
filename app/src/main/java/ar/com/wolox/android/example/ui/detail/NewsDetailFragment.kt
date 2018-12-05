@@ -26,9 +26,7 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
         return false
     }
 
-    override fun init() {
-        onNewLoaded(presenter.new)
-    }
+    override fun init() = onNewLoaded(presenter.new)
 
     override fun layout() = R.layout.fragment_news_detail
 
@@ -77,17 +75,11 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
         }
     }
 
-    override fun onNewNoFound() {
-        mToastFactory.showLong(R.string.news_detail_new_no_found)
-    }
+    override fun onNewNoFound() = mToastFactory.showLong(R.string.news_detail_new_no_found)
 
-    override fun onNoConnection() {
-        mToastFactory.showLong(R.string.app_user_not_connected)
-    }
+    override fun onNoConnection() = mToastFactory.showLong(R.string.app_user_not_connected)
 
-    override fun onUnexpectedError() {
-        mToastFactory.showLong(R.string.app_unexpected_error)
-    }
+    override fun onUnexpectedError() = mToastFactory.showLong(R.string.app_unexpected_error)
 
     private fun onImageClicked() {
         val fullScreenIntent = Intent(context, NewFullScreenActivity::class.java)

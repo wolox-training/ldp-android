@@ -18,7 +18,6 @@ class NewsPresenter @Inject constructor(
     private val mSharedPreferencesManager: SharedPreferencesManager
 ) : BasePresenter<INewsView>() {
 
-    val TAG = NewsPresenter::class.java.simpleName
     val EMPTY_USER = -1
 
     var nextPage: String? = null
