@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/static_spacing_medium_extra"
+        android:paddingTop="@dimen/static_spacing_medium_extra"
+        android:paddingEnd="@dimen/static_spacing_medium_extra"
+        android:paddingBottom="@dimen/static_spacing_medium_extra">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/mNewImage"
+            android:layout_width="@dimen/img_medium"
+            android:layout_height="@dimen/img_medium"
+            android:layout_centerVertical="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:fadeDuration="500"
+            fresco:failureImage="@drawable/ic_news_broken_image"
+            fresco:failureImageScaleType="center"
+            fresco:placeholderImage="@drawable/ic_news_placeholder"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:progressBarAutoRotateInterval="1000" />
+
+        <TextView
+            android:id="@+id/mTimeAgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/static_spacing_medium"
+            android:gravity="center"
+            android:minWidth="@dimen/img_small"
+            android:textSize="@dimen/font_medium_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="15m" />
+
+        <ImageView
+            android:id="@+id/mLikeIcon"
+            android:layout_width="@dimen/img_small"
+            android:layout_height="@dimen/img_small"
+            android:layout_below="@id/mTimeAgo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/static_spacing_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mTimeAgo"
+            tools:src="@drawable/ic_like_off" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/static_spacing_medium"
+            android:layout_marginEnd="@dimen/static_spacing_medium"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/mTimeAgo"
+            app:layout_constraintStart_toEndOf="@id/mNewImage"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/mNewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/font_large"
+                android:textStyle="bold"
+                tools:text="Ali Connors" />
+
+            <TextView
+                android:id="@+id/mNewText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/static_spacing_tiny"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textSize="@dimen/font_medium_extra"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec diam ligula, vulputate eu lectus nec, rutrum vulputate neque. Nulla facilisi. Nullam id finibus lorem, at ornare neque." />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="@dimen/static_spacing_small"
+        android:background="@android:color/darker_gray" />
+
+</LinearLayout>

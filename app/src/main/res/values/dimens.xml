@@ -52,5 +52,9 @@
     <dimen name="dimen_huge_extra_height">56dp</dimen>
     <dimen name="dimen_large_extra">24dp</dimen>
 
+    <!-- Image sizes -->
+    <dimen name="img_medium">50dp</dimen>
+    <dimen name="img_small">35dp</dimen>
+
     <!-- Add your custom dimens here -->
 </resources>

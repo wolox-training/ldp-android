@@ -23,7 +23,7 @@
     <string name="login_invalid_email">Enter a valid email</string>
     <string name="login_invalid_credentials">Email or password are invalid</string>
     <string name="login_wait_a_moment">Please wait&#8230;</string>
-    <string name="login_user_no_connected">It looks like you are no connected, check your connection and try again</string>
+    <string name="login_user_no_connected">@string/app_user_not_connected</string>
 
     <!-- Sign up -->
     <string name="sign_up_confirm_password">Confirm password</string>
@@ -35,7 +35,10 @@
     <string name="home_news">News</string>
     <string name="home_profile">Profile</string>
     <string name="home_wolox">Wolox</string>
+    <string name="home_news_not_found">Not found news</string>
 
     <string name="app_not_found">No available applications to proceed</string>
     <string name="app_unexpected_error">Oops! Something went wrong.</string>
+    <string name="app_user_not_connected">It looks like you are no connected, check your connection and try again</string>
+    <string name="app_date_format">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
 </resources>
