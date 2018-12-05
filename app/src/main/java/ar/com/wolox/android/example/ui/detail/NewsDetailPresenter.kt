@@ -1,6 +1,5 @@
 package ar.com.wolox.android.example.ui.detail
 
-import android.util.Log
 import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.model.NewChangedEvent
 import ar.com.wolox.android.example.network.NewsService
@@ -17,9 +16,6 @@ class NewsDetailPresenter @Inject constructor(
     mRetrofitServices: RetrofitServices,
     private val mSharedPreferencesManager: SharedPreferencesManager
 ) : BasePresenter<INewsDetailView>() {
-
-    private val TAG = NewsDetailPresenter::class.java.simpleName
-    private val EMPTY_USER_ID = -1
 
     private val mNewsService: NewsService = mRetrofitServices.getService(NewsService::class.java)
 
@@ -89,17 +85,28 @@ class NewsDetailPresenter @Inject constructor(
                         }
                     }
 
-                    onResponseFailed { responseBody, statusCode ->
-                        runIfViewAttached { iNewsDetailView -> iNewsDetailView.onLikeEnable() }
-                        Log.d(TAG, "$responseBody $statusCode")
+                    onResponseFailed { _, _ ->
+                        runIfViewAttached { iNewsDetailView ->
+                            iNewsDetailView.onLikeEnable()
+                            iNewsDetailView.onUnexpectedError()
+                        }
                     }
 
                     onCallFailure {
-                        runIfViewAttached { iNewsDetailView -> iNewsDetailView.onLikeEnable() }
-                        Log.d(TAG, it.toString())
+                        runIfViewAttached { iNewsDetailView ->
+                            iNewsDetailView.onLikeEnable()
+                            when (it) {
+                                is UnknownHostException -> iNewsDetailView.onNoConnection()
+                                else -> iNewsDetailView.onUnexpectedError()
+                            }
+                        }
                     }
                 })
     }
 
     fun getUserId(): Int = mSharedPreferencesManager.get(Constants.UserCredentials.USER_ID, EMPTY_USER_ID)
+
+    companion object {
+        private const val EMPTY_USER_ID = -1
+    }
 }

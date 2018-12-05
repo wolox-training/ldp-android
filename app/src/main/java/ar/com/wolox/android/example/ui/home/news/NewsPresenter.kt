@@ -18,8 +18,6 @@ class NewsPresenter @Inject constructor(
     private val mSharedPreferencesManager: SharedPreferencesManager
 ) : BasePresenter<INewsView>() {
 
-    val EMPTY_USER = -1
-
     var nextPage: String? = null
 
     fun hasMore() = nextPage != null
@@ -95,4 +93,8 @@ class NewsPresenter @Inject constructor(
      * Check whether a user is logged in
      */
     fun userLoggedIn(): Int = mSharedPreferencesManager.get(Constants.UserCredentials.USER_ID, EMPTY_USER)
+
+    companion object {
+        private const val EMPTY_USER = -1
+    }
 }
