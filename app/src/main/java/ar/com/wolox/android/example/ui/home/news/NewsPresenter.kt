@@ -92,5 +92,8 @@ class NewsPresenter @Inject constructor(
         })
     }
 
+    /**
+     * Check whether a user is logged in
+     */
     fun userLoggedIn(): Int = mSharedPreferencesManager.get(Constants.UserCredentials.USER_ID, EMPTY_USER)
 }

@@ -71,7 +71,7 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
         new.run {
             mNewTitleText.text = title
             mNewText.text = text
-            mTimeAgoText.text = DateUtils.toDuration(createdAt)
+            mTimeAgoText.text = DateUtils.toDuration(createdAt, context!!)
             mNewImage.setImageURI(picture)
             mLikeButton.setImageResource(if (likes.contains(presenter.getUserId())) R.drawable.ic_like_on else R.drawable.ic_like_off)
         }
