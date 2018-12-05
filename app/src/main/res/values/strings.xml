@@ -24,6 +24,7 @@
     <string name="login_invalid_credentials">Email or password are invalid</string>
     <string name="login_wait_a_moment">Please wait&#8230;</string>
     <string name="login_user_no_connected">@string/app_user_not_connected</string>
+    <string name="login_user_signing_with_google_account">User logged in with Google account:</string>
 
     <!-- Sign up -->
     <string name="sign_up_confirm_password">Confirm password</string>

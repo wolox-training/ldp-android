@@ -1,14 +1,23 @@
 package ar.com.wolox.android.example.ui.login;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.view.View;
 import android.support.annotation.NonNull;
 import android.text.method.LinkMovementMethod;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import javax.inject.Inject;
 
@@ -24,15 +33,20 @@ import butterknife.BindView;
  */
 public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILoginView {
 
+    private static final int GOOGLE_SIGN_IN = 101;
+
     @BindView(R.id.fragment_login_login_button) Button mLoginButton;
     @BindView(R.id.fragment_login_sign_up_button) Button mSignUpButton;
     @BindView(R.id.fragment_login_email_input) EditText mEmailInput;
     @BindView(R.id.fragment_login_password_input) EditText mPasswordInput;
     @BindView(R.id.fragment_login_terms_and_conditions) TextView mTermsAndConditions;
+    @BindView(R.id.fragment_login_sign_in_google_button) SignInButton mGoogleSignInButton;
 
     @Inject ToastFactory mToastFactory;
 
     ProgressDialog mProgressDialog;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     public int layout() {
@@ -40,7 +54,13 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     }
 
     @Override
-    public void init() {}
+    public void init() {
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(mGoogleSignInButton.getContext(), googleSignInOptions);
+    }
 
     @Override
     public void setUi(View v) {
@@ -51,13 +71,15 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(getString(R.string.login_wait_a_moment));
+
+        mGoogleSignInButton.setSize(SignInButton.SIZE_WIDE);
     }
 
     @Override
     public void populate() {
         super.populate();
 
-        if (getPresenter().isUserLoggedIn()) {
+        if (getPresenter().isUserLoggedIn() || GoogleSignIn.getLastSignedInAccount(mGoogleSignInButton.getContext()) != null) {
             onUserLoggedIn();
 
             try {
@@ -81,6 +103,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         super.setListeners();
         mLoginButton.setOnClickListener(view -> onLoginClicked());
         mSignUpButton.setOnClickListener(view -> openSignUpActivity());
+        mGoogleSignInButton.setOnClickListener(view -> onGoogleSignInClicked());
     }
 
     @Override
@@ -146,6 +169,18 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
         mPasswordInput.setError(getString(R.string.login_empty_form));
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        hideProgress();
+
+        if (requestCode == GOOGLE_SIGN_IN && resultCode != Activity.RESULT_CANCELED) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInWithGoogleResult(task);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     void openSignUpActivity() {
         Intent intent = new Intent(getContext(), SignUpActivity.class);
         startActivity(intent);
@@ -165,6 +200,26 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
             showInvalidEmailError();
         } else {
             getPresenter().login(email, password);
+        }
+    }
+
+    public void onGoogleSignInClicked() {
+        if (mGoogleSignInClient == null) {
+            mToastFactory.showLong(R.string.app_unexpected_error);
+        } else {
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            showProgress();
+            startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
+        }
+    }
+
+    public void handleSignInWithGoogleResult(Task<GoogleSignInAccount> task) {
+        try {
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            mToastFactory.showLong(getString(R.string.login_user_signing_with_google_account) + " " + account.getEmail());
+            onUserLoggedIn();
+        } catch (ApiException e) {
+            mToastFactory.showLong(String.format("%s %s", getString(R.string.app_unexpected_error), e.getMessage()));
         }
     }
 }
