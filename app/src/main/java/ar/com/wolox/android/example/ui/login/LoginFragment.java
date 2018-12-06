@@ -216,10 +216,10 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
     public void handleSignInWithGoogleResult(Task<GoogleSignInAccount> task) {
         try {
             GoogleSignInAccount account = task.getResult(ApiException.class);
-            mToastFactory.showLong(getString(R.string.login_user_signing_with_google_account) + " " + account.getEmail());
+            mToastFactory.showLong(getString(R.string.login_user_signing_with_google_account, account.getEmail()));
             onUserLoggedIn();
         } catch (ApiException e) {
-            mToastFactory.showLong(String.format("%s %s", getString(R.string.app_unexpected_error), e.getMessage()));
+            mToastFactory.showLong(getString(R.string.app_unexpected_error, e.getMessage()));
         }
     }
 }
