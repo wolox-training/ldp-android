@@ -9,21 +9,14 @@ class NewsDetailActivity : WolmoActivity() {
 
     @Inject lateinit var mNewsDetailFragment: NewsDetailFragment
 
-    private lateinit var mFragmentExtras: Bundle
-
     override fun init() {
-        mNewsDetailFragment.arguments = mFragmentExtras
+        mNewsDetailFragment.arguments = requireArguments()
         replaceFragment(R.id.activity_news_detail_fragment_container, mNewsDetailFragment)
     }
 
     override fun layout() = R.layout.activity_news_detail
 
-    override fun handleArguments(args: Bundle?): Boolean {
-        args?.let {
-            mFragmentExtras = args
-            return true
-        }
+    override fun handleArguments(args: Bundle?) = args != null
 
-        return false
-    }
+    private fun requireArguments() = intent.extras!!
 }

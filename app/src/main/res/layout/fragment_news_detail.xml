@@ -107,11 +107,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/static_spacing_medium_extra"
-                android:text="@string/design_placeholder_medium"
                 android:textSize="@dimen/font_medium_extra"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/mNewTitleText" />
+                app:layout_constraintTop_toBottomOf="@id/mNewTitleText"
+                tools:text="@string/design_placeholder_medium" />
 
             <ImageButton
                 android:id="@+id/mLikeButton"

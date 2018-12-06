@@ -8,19 +8,14 @@ import kotlinx.android.synthetic.main.activity_news_full_screen.*
 
 class NewFullScreenActivity : WolmoActivity() {
 
-    override fun init() {}
+    override fun init() {
+        val pictureUrl = requireArguments().get(NEWS_PICTURE) as String
+        mNewImage.setImageURI(pictureUrl)
+    }
 
     override fun layout() = R.layout.activity_news_full_screen
 
-    override fun handleArguments(args: Bundle?): Boolean {
-        args?.let {
-            val pictureUrl = args.get(NEWS_PICTURE) as String
-            mNewImage.setImageURI(pictureUrl)
-            return true
-        }
-
-        return false
-    }
+    override fun handleArguments(args: Bundle?) = args?.containsKey(NEWS_PICTURE) ?: false
 
     override fun setUi() {
         super.setUi()
@@ -30,6 +25,8 @@ class NewFullScreenActivity : WolmoActivity() {
                     View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         }
     }
+
+    private fun requireArguments() = intent.extras!!
 
     companion object {
         const val NEWS_PICTURE = "news_picture"

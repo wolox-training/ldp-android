@@ -11,5 +11,5 @@ data class New(
     val text: String
 ) : Serializable {
     override fun equals(other: Any?) = if (other !is New) false else (id == other.id)
-    override fun hashCode(): Int = super.hashCode()
+    override fun hashCode() = super.hashCode()
 }

@@ -16,17 +16,13 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
 
     @Inject lateinit var mToastFactory: ToastFactory
 
-    override fun handleArguments(arguments: Bundle?): Boolean {
-        arguments?.let {
-            val new = it.getSerializable(NewsDetailFragment.NEWS_OBJECT) as New
-            presenter.new = new
-            return true
-        }
+    override fun handleArguments(arguments: Bundle?) = arguments?.containsKey(NEWS_OBJECT) ?: false
 
-        return false
+    override fun init() {
+        val new = requireArguments().getSerializable(NEWS_OBJECT) as New
+        presenter.new = new
+        onNewLoaded(new)
     }
-
-    override fun init() = onNewLoaded(presenter.new)
 
     override fun layout() = R.layout.fragment_news_detail
 
@@ -69,7 +65,7 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
         new.run {
             mNewTitleText.text = title
             mNewText.text = text
-            mTimeAgoText.text = DateUtils.toDuration(createdAt, context!!)
+            mTimeAgoText.text = DateUtils.toDuration(createdAt, requireContext())
             mNewImage.setImageURI(picture)
             mLikeButton.setImageResource(if (likes.contains(presenter.getUserId())) R.drawable.ic_like_on else R.drawable.ic_like_off)
         }
@@ -82,10 +78,12 @@ class NewsDetailFragment @Inject constructor() : WolmoFragment<NewsDetailPresent
     override fun onUnexpectedError() = mToastFactory.showLong(R.string.app_unexpected_error)
 
     private fun onImageClicked() {
-        val fullScreenIntent = Intent(context, NewFullScreenActivity::class.java)
+        val fullScreenIntent = Intent(requireContext(), NewFullScreenActivity::class.java)
         fullScreenIntent.putExtra(NewFullScreenActivity.NEWS_PICTURE, presenter.new.picture)
         startActivity(fullScreenIntent)
     }
+
+    private fun requireArguments() = arguments!!
 
     companion object {
         const val NEWS_OBJECT = "news_object"

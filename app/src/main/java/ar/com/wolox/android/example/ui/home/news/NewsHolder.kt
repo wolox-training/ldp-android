@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_new.view.*
 class NewsHolder(view: View, private val mOnNewClickListener: INewClickListener) : RecyclerView.ViewHolder(view) {
 
     private lateinit var mNew: New
-    var mUserLoggedIn: Int = -1
+    var mUserLoggedIn = -1
 
     init {
         itemView.setOnClickListener {
