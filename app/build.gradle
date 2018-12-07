@@ -28,6 +28,8 @@ android {
         versionCode 1
         versionName "1.0.0"
 
+        multiDexEnabled true
+
         setProperty("archivesBaseName", "WoloxApp-$versionName") // Generated APK file name
     }
 
@@ -142,4 +144,17 @@ dependencies {
 
     // Time libraries
     implementation "org.ocpsoft.prettytime:prettytime:4.0.1.Final"
+
+    // Youtube
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation('com.google.api-client:google-api-client-android:1.25.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    implementation('com.google.apis:google-api-services-youtube:v3-rev206-1.25.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    // Multidex
+    compile 'com.android.support:multidex:1.0.3'
 }
