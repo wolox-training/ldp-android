@@ -78,6 +78,12 @@
             android:textColor="@android:color/white"
             android:theme="@style/bg_login_sign_up" />
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/fragment_login_sign_in_google_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/static_spacing_medium" />
+
     </LinearLayout>
 
     <TextView
