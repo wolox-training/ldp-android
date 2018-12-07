@@ -14,9 +14,7 @@ class NewsAdapter @Inject constructor(private val mNewClockListener: INewClickLi
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): NewsHolder {
         val layoutInflater = LayoutInflater.from(viewGroup.context)
         val itemView = layoutInflater.inflate(R.layout.item_new, viewGroup, false)
-        val holder = NewsHolder(itemView, mNewClockListener)
-        holder.mUserLoggedIn = mUserLoggedIn
-        return holder
+        return NewsHolder(itemView, mNewClockListener, mUserLoggedIn)
     }
 
     override fun getItemCount() = mNewsList.size

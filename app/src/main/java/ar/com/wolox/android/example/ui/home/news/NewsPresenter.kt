@@ -13,10 +13,7 @@ import retrofit2.Response
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class NewsPresenter @Inject constructor(
-    private val mRetrofitServices: RetrofitServices,
-    private val mSharedPreferencesManager: SharedPreferencesManager
-) : BasePresenter<INewsView>() {
+class NewsPresenter @Inject constructor(private val mRetrofitServices: RetrofitServices, private val mSharedPreferencesManager: SharedPreferencesManager) : BasePresenter<INewsView>() {
 
     var nextPage: String? = null
 

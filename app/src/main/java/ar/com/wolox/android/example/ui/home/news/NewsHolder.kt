@@ -7,10 +7,9 @@ import ar.com.wolox.android.example.model.New
 import ar.com.wolox.android.example.utils.DateUtils
 import kotlinx.android.synthetic.main.item_new.view.*
 
-class NewsHolder(view: View, private val mOnNewClickListener: INewClickListener) : RecyclerView.ViewHolder(view) {
+class NewsHolder(view: View, private val mOnNewClickListener: INewClickListener, val mUserLoggedIn: Int) : RecyclerView.ViewHolder(view) {
 
     private lateinit var mNew: New
-    var mUserLoggedIn = -1
 
     init {
         itemView.setOnClickListener {
