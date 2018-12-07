@@ -6,6 +6,8 @@ import android.graphics.drawable.GradientDrawable.Orientation
 import android.graphics.drawable.GradientDrawable.Orientation.TL_BR
 import android.support.annotation.ColorInt
 import android.support.annotation.LayoutRes
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
@@ -100,4 +102,9 @@ open class SimpleTextWatcher : TextWatcher {
     override fun afterTextChanged(editable: Editable) {}
     override fun beforeTextChanged(text: CharSequence, start: Int, count: Int, after: Int) {}
     override fun onTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {}
+}
+
+fun RecyclerView.LayoutManager.shouldRequestMore(viewsThreshold: Int) = when (this) {
+    is LinearLayoutManager -> findLastVisibleItemPosition() >= (itemCount - viewsThreshold)
+    else -> false
 }

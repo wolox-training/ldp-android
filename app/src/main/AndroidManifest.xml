@@ -30,6 +30,8 @@
 
         <activity android:name=".example.ui.detail.NewFullScreenActivity" />
 
+        <activity android:name=".example.ui.youtube.YouTubeVideoPlayerActivity" />
+
     </application>
 
 </manifest>
