@@ -45,7 +45,8 @@
     <string name="news_detail_post">Post</string>
 
     <string name="app_not_found">No available applications to proceed</string>
-    <string name="app_unexpected_error">Oops! Something went wrong. %1$s</string>
+    <string name="app_unexpected_error">Oops! Something went wrong.</string>
+    <string name="app_unexpected_error_format">Oops! Something went wrong. %1$s</string>
     <string name="app_user_not_connected">It looks like you are no connected, check your connection and try again</string>
     <string name="app_date_format">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
     <string name="app_youtube_api_key">AIzaSyDVArRIE2nd63vaH0ovSUXv2IxlUuLgJW0</string>

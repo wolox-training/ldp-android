@@ -219,7 +219,7 @@ public class LoginFragment extends WolmoFragment<LoginPresenter> implements ILog
             mToastFactory.showLong(getString(R.string.login_user_signing_with_google_account, account.getEmail()));
             onUserLoggedIn();
         } catch (ApiException e) {
-            mToastFactory.showLong(getString(R.string.app_unexpected_error, e.getMessage()));
+            mToastFactory.showLong(getString(R.string.app_unexpected_error_format, e.getMessage()));
         }
     }
 }
