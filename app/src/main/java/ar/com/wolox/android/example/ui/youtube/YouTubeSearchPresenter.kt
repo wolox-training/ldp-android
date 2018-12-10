@@ -1,7 +1,6 @@
 package ar.com.wolox.android.example.ui.youtube
 
 import android.support.annotation.NonNull
-import android.util.Log
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import com.google.api.client.extensions.android.http.AndroidHttp
 import com.google.api.client.json.jackson2.JacksonFactory
@@ -36,7 +35,6 @@ class YouTubeSearchPresenter @Inject constructor() : BasePresenter<IYouTubeSearc
         Thread {
             try {
                 val result = search.execute()
-                Log.d("ldpenal", "here'")
 
                 runIfViewAttached { iYouTubeSearchView ->
                     if (result == null) {

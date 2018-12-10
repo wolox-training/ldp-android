@@ -4,7 +4,7 @@ import android.content.Intent
 import android.support.annotation.NonNull
 import android.support.v7.widget.LinearLayoutManager
 import ar.com.wolox.android.R
-import ar.com.wolox.android.example.model.SupportedYouTubeObject
+import ar.com.wolox.android.example.model.SearchResultModelAdapter
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.android.example.utils.InfiniteScroll
 import ar.com.wolox.android.example.utils.onClickListener
@@ -83,7 +83,7 @@ class YouTubeSearchFragment @Inject constructor() : WolmoFragment<YouTubeSearchP
         when (result.id.kind) {
             Extras.YouTubeResultKind.KIND_VIDEO, Extras.YouTubeResultKind.KIND_PLAYLIST -> {
                 val videoPlayerIntent = Intent(requireContext(), YouTubeVideoPlayerActivity::class.java)
-                videoPlayerIntent.putExtra(YouTubeVideoPlayerActivity.ITEM_OBJECT, SupportedYouTubeObject(result.id.kind, result.id.playlistId, result.id.videoId))
+                videoPlayerIntent.putExtra(YouTubeVideoPlayerActivity.ITEM_OBJECT, SearchResultModelAdapter(result.id.kind, result.id.playlistId, result.id.videoId))
                 startActivity(videoPlayerIntent)
             }
             else -> {

@@ -2,7 +2,7 @@ package ar.com.wolox.android.example.ui.youtube
 
 import android.os.Bundle
 import ar.com.wolox.android.R
-import ar.com.wolox.android.example.model.SupportedYouTubeObject
+import ar.com.wolox.android.example.model.SearchResultModelAdapter
 import ar.com.wolox.android.example.utils.Extras
 import ar.com.wolox.wolmo.core.activity.WolmoActivity
 import ar.com.wolox.wolmo.core.util.ToastFactory
@@ -29,7 +29,7 @@ class YouTubeVideoPlayerActivity @Inject constructor() : WolmoActivity(), YouTub
 
     override fun onInitializationSuccess(provider: YouTubePlayer.Provider?, youTubePlayer: YouTubePlayer?, wasRestored: Boolean) {
         youTubePlayer?.run {
-            val resultObject = requiredArguments().getSerializable(ITEM_OBJECT) as SupportedYouTubeObject
+            val resultObject = requiredArguments().getSerializable(ITEM_OBJECT) as SearchResultModelAdapter
             when (resultObject.kind) {
                 Extras.YouTubeResultKind.KIND_PLAYLIST -> youTubePlayer.loadPlaylist(resultObject.playlistId)
                 Extras.YouTubeResultKind.KIND_VIDEO -> youTubePlayer.loadVideo(resultObject.videoId)
