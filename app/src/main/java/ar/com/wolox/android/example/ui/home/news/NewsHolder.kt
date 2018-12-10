@@ -4,26 +4,28 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import ar.com.wolox.android.R
 import ar.com.wolox.android.example.model.New
+import ar.com.wolox.android.example.utils.DateUtils
 import kotlinx.android.synthetic.main.item_new.view.*
-import org.joda.time.format.DateTimeFormat
-import org.ocpsoft.prettytime.PrettyTime
-import java.util.Locale
 
-class NewsHolder(view: View) : RecyclerView.ViewHolder(view) {
+class NewsHolder(view: View, private val mOnNewClickListener: INewClickListener, val mUserLoggedIn: Int) : RecyclerView.ViewHolder(view) {
+
+    private lateinit var mNew: New
+
+    init {
+        itemView.setOnClickListener {
+            mOnNewClickListener.onNewClicked(mNew)
+        }
+    }
 
     fun bindHolder(item: New) {
-        itemView.mNewTitle.text = item.title
+        mNew = item
+
+        itemView.mNewTitleText.text = item.title
         itemView.mNewText.text = item.text
 
-        val localDate = DateTimeFormat
-                .forPattern(itemView.context.getString(R.string.app_date_format))
-                .withLocale(Locale.getDefault())
-                .parseLocalDate(item.createdAt)
-                .toDate()
+        itemView.mTimeAgoText.text = DateUtils.toDuration(item.createdAt, itemView.context)
 
-        itemView.mTimeAgo.text = PrettyTime().format(localDate)
-
-        itemView.mLikeIcon.setImageResource(R.drawable.ic_like_off)
+        itemView.mLikeIcon.setImageResource(if (item.likes.contains(mUserLoggedIn)) R.drawable.ic_like_on else R.drawable.ic_like_off)
         itemView.mNewImage.setImageURI(item.picture)
     }
 }

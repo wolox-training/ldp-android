@@ -57,6 +57,7 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
                 User user = users.get(0);
                 storeEmail(user.getEmail());
                 mSharedPreferencesManager.store(Constants.UserCredentials.USER_LOGGED_IN, true);
+                mSharedPreferencesManager.store(Constants.UserCredentials.USER_ID, user.getId());
 
                 runIfViewAttached(ILoginView::onUserLoggedIn);
             }
