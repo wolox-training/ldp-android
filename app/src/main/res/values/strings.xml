@@ -37,15 +37,25 @@
     <string name="home_profile">Profile</string>
     <string name="home_wolox">Wolox</string>
     <string name="home_news_not_found">Not found news</string>
+    <string name="home_youtube_search">YouTube Search</string>
+    <string name="home_youtube_no_search_criteria">Please enter a search criteria</string>
 
     <!-- News detail -->
     <string name="news_detail_new_no_found">New not found</string>
     <string name="news_detail_post">Post</string>
 
     <string name="app_not_found">No available applications to proceed</string>
-    <string name="app_unexpected_error">Oops! Something went wrong. %1$s</string>
+    <string name="app_unexpected_error">Oops! Something went wrong.</string>
+    <string name="app_unexpected_error_format">Oops! Something went wrong. %1$s</string>
     <string name="app_user_not_connected">It looks like you are no connected, check your connection and try again</string>
     <string name="app_date_format">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
+    <string name="app_youtube_api_key">AIzaSyDVArRIE2nd63vaH0ovSUXv2IxlUuLgJW0</string>
+
+    <string name="youtube_search">Search</string>
+    <string name="youtube_not_found_videos">Not found videos</string>
+    <string name="youtube_not_supported_result">The kind of result is not supported yet!</string>
+    <string name="youtube_playlist">Playlist</string>
+    <string name="youtube_channel">Channel</string>
 
     <string name="design_placeholder_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec diam ligula, vulputate eu lectus nec, rutrum vulputate neque. Nulla facilisi. Nullam id finibus lorem, at ornare neque.</string>
 

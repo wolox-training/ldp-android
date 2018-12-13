@@ -13,4 +13,9 @@ object Extras {
     object UserLogin {
         const val USERNAME = "username"
     }
+
+    object YouTubeResultKind {
+        const val KIND_PLAYLIST = "youtube#playlist"
+        const val KIND_VIDEO = "youtube#video"
+    }
 }

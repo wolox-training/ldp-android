@@ -1,5 +1,7 @@
 package ar.com.wolox.android.example
 
+import android.content.Context
+import android.support.multidex.MultiDex
 import ar.com.wolox.android.BuildConfig
 import ar.com.wolox.android.example.di.DaggerAppComponent
 import ar.com.wolox.wolmo.core.WolmoApplication
@@ -17,6 +19,11 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 
 class NewsApplication : WolmoApplication() {
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
     override fun onInit() {
         // Initialize Application stuff here
